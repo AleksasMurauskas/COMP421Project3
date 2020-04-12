@@ -7,8 +7,8 @@ import matplotlib.pyplot as plt
 
 
 
-if __name__ == "__main__":
-	main()
+#if __name__ == "__main__":
+
 
 def main():
 	#connect to database
@@ -23,30 +23,41 @@ def main():
 	print("Wlecome to the CinemaClub Databse Interace")
 	print("")
 	display_menu()
-	while(true): #infinite loop for user inputs 
-		
+
+	while(1): #infinite loop for user inputs 
 		use_in= str(input())
 		if(int(use_in)==0): #prompted menu to be displayed  
 			display_menu()
 		if(int(use_in)==10): # prompted exit 
 			exit_prog()
-
-
-
-
+		if(int(use_in)==1):
+			processOne()
+		if(int(use_in)==2):
+			processTwo()
+		if(int(use_in)==3):
+			processThree()
+		if(int(use_in)==4):
+			processFour()
+		if(int(use_in)==5):
+			processFive()
 
 
 def processOne():
-
+	print("placeholder1")
 
 def processTwo():
+	print("placeholder2")
 
 def processThree():
+	print("placeholder3")
 
 
 def processFour():
+	print("placeholder4")
 
 def processFive():
+	print("placeholder5")
+
 
 
 
@@ -69,3 +80,4 @@ def display_menu():
 	print("10: Exit Program")
 
 
+main()
