@@ -4,12 +4,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-
-
-
-#if __name__ == "__main__":
-
-
 def main():
 	#connect to database
 	passw = "Cinema2078"
@@ -20,26 +14,32 @@ def main():
 		host="comp421.cs.mcgill.ca",
 		port="5432",
 		database="cs421")
-	print("Wlecome to the CinemaClub Databse Interace")
+	print("Welcome to the CinemaClub Databse Interace")
 	print("")
 	display_menu()
 
 	while(1): #infinite loop for user inputs 
+		print("Input:", end=" ")
 		use_in= str(input())
-		if(int(use_in)==0): #prompted menu to be displayed  
+		if(use_in==""):
+			print("Invalid Input, please try again")
+			continue
+		elif(int(use_in)==0): #prompted menu to be displayed  
 			display_menu()
-		if(int(use_in)==10): # prompted exit 
+		elif(int(use_in)==10): # prompted exit 
 			exit_prog()
-		if(int(use_in)==1):
+		elif(int(use_in)==1):
 			processOne()
-		if(int(use_in)==2):
+		elif(int(use_in)==2):
 			processTwo()
-		if(int(use_in)==3):
+		elif(int(use_in)==3):
 			processThree()
-		if(int(use_in)==4):
+		elif(int(use_in)==4):
 			processFour()
-		if(int(use_in)==5):
+		elif(int(use_in)==5):
 			processFive()
+		else:
+			print("Invalid Input, please try again")
 
 
 def processOne():
