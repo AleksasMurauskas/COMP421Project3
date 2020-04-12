@@ -21,8 +21,7 @@ def main():
 		port="5432",
 		database="cs421")
 	print("Wlecome to the CinemaClub Databse Interace")
-
-
+	print("")
 	display_menu()
 	while(true): #infinite loop for user inputs 
 		
@@ -37,6 +36,18 @@ def main():
 
 
 
+def processOne():
+
+
+def processTwo():
+
+def processThree():
+
+
+def processFour():
+
+def processFive():
+
 
 
 def exit_prog():
@@ -48,7 +59,7 @@ def exit_prog():
 
 def display_menu():
 	print("-----------------Program Menu-----------------")
-	print("Enter the associted number to begin a feature:")	
+	print("Enter the associted number to begin a process:")	
 	print("0: Redisplay Menu")
 	print("1: Query 1")
 	print("2: Query 2")
