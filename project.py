@@ -5,6 +5,12 @@ import matplotlib.pyplot as plt
 
 
 def main():
+
+	movieIndexQuery= """
+		CREATE INDEX employeeNames ON Employee(name);
+	"""
+
+
 	#connect to database
 	passw = "Cinema2078"
 	#print("please enter the password for cs421g78:")
