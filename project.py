@@ -6,9 +6,7 @@ import matplotlib.pyplot as plt
 
 def main():
 
-	movieIndexQuery= """
-		CREATE INDEX employeeNames ON Employee(name);
-	"""
+	movieIndexQuery= """CREATE INDEX employeeNames ON Employee(name);"""
 
 	#connect to database
 	passw = "Cinema2078"
@@ -78,8 +76,20 @@ def processOne(connection): #Make a New Employee
 	c.execute(Query_fin)
 	print(Query_fin)
 
-def processTwo(): #Is there a creening on this date?
+def processTwo(): #What movie titles are screening on this date
 	print("placeholder2")
+	print("What is the date you would like to select")
+	#in_date =input()
+	in_date ="1919-06-26"
+	query = """select name from screening s, movie m where s.movieid = m.movieid and date ='1919-06-26'"""
+	q_input = """select name from screening s, movie m where s.movieid = m.movieid and date ="""
+	q_fin = q_input+"'"+in_date+"';"
+
+	dat1 = pd.read_sql_query(query, connection)
+	dat1.set_index(['Movie Titles'])
+	print("Movie Titles:\n")
+	print(dat1.head())
+
 
 def processThree(): #How many times has this item sold
 	print("placeholder3")
@@ -87,8 +97,9 @@ def processThree(): #How many times has this item sold
 def processFour(): # How many Items has a customer purchased
 	print("placeholder4")
 
-def processFive(): # 
+def processFive(): 
 	print("placeholder5")
+	print("What is the id of the ")
 
 
 
@@ -105,11 +116,10 @@ def display_menu():
 	print("Enter the associted number to begin a process:")	
 	print("0: Redisplay Menu")
 	print("1: Create a new Employee")
-	print("2: Query 2")
+	print("2: What movie screenings are on this date")
 	print("3: Query 3")
 	print("4: Query 4")
 	print("5: Query 5")
 	print("10: Exit Program")
-
 
 main()
