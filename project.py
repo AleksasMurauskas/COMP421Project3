@@ -96,7 +96,7 @@ def processThree(): #How many cinemas are have a certain movie in their catalog
 def processFour(): # How many Items has a customer purchases the 
 	print("placeholder4")
 
-def processFive(): #Show which cinemas have a room larger than 260 seats
+def processFive(connection): #Show which cinemas have a room larger than 260 seats
 	print("placeholder5")
 
 	query= """select address, nbr, capacity from cinema c, room r
@@ -104,6 +104,12 @@ def processFive(): #Show which cinemas have a room larger than 260 seats
 			and capacity >260 """
 	print("What is the id of the ")
 
+
+	
+	dat1 = pd.read_sql_query(query, connection)
+	dat1.set_index(['Cinema address, Room Number, Room Capacity'])
+	print("Cinemas:\n")
+	print(dat1.head())
 
 
 
