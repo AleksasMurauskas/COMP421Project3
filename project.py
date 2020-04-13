@@ -46,8 +46,6 @@ def main():
 
 
 def processOne(connection): #Make a New Employee
-	
-
 	print("What is their name?")
 	#new_name= input()
 	new_name= "Aleks"
@@ -77,7 +75,6 @@ def processOne(connection): #Make a New Employee
 	print(Query_fin)
 
 def processTwo(): #What movie titles are screening on this date
-	print("placeholder2")
 	print("What is the date you would like to select")
 	#in_date =input()
 	in_date ="1919-06-26"
@@ -91,14 +88,20 @@ def processTwo(): #What movie titles are screening on this date
 	print(dat1.head())
 
 
-def processThree(): #How many times has this item sold
+def processThree(): #How many cinemas are have a certain movie in their catalog
 	print("placeholder3")
+	cinema=cinema
 
-def processFour(): # How many Items has a customer purchased
+
+def processFour(): # How many Items has a customer purchases the 
 	print("placeholder4")
 
-def processFive(): 
+def processFive(): #Show which cinemas have a room larger than 260 seats
 	print("placeholder5")
+
+	query= """select address, nbr, capacity from cinema c, room r
+			where c.cid=r.cid 
+			and capacity >260 """
 	print("What is the id of the ")
 
 
@@ -117,9 +120,9 @@ def display_menu():
 	print("0: Redisplay Menu")
 	print("1: Create a new Employee")
 	print("2: What movie screenings are on this date")
-	print("3: Query 3")
+	print("3: How many cinemas are have a certain movie in their catalog")
 	print("4: Query 4")
-	print("5: Query 5")
+	print("5: ") 
 	print("10: Exit Program")
 
 main()
