@@ -10,7 +10,6 @@ def main():
 		CREATE INDEX employeeNames ON Employee(name);
 	"""
 
-
 	#connect to database
 	passw = "Cinema2078"
 	#print("please enter the password for cs421g78:")
@@ -33,9 +32,9 @@ def main():
 		elif(int(use_in)==0): #prompted menu to be displayed  
 			display_menu()
 		elif(int(use_in)==10): # prompted exit 
-			exit_prog()
+			exit_prog(connection)
 		elif(int(use_in)==1):
-			processOne()
+			processOne(connection)
 		elif(int(use_in)==2):
 			processTwo()
 		elif(int(use_in)==3):
@@ -48,28 +47,55 @@ def main():
 			print("Invalid Input, please try again")
 
 
-def processOne():
-	print("placeholder1")
+def processOne(connection): #Make a New Employee
+	
 
-def processTwo():
+	print("What is their name?")
+	#new_name= input()
+	new_name= "Aleks"
+	print("What is their address?")
+	#new_add= input()
+	new_add= "3434 St. Famille" 
+	print("What is their new email?")
+	#new_email= input()
+	new_email= "avm@avm.ca"
+	new_add= "3434 St. Famille" 
+	print("Where do they work? please enter a cid")
+	#new_cid= input()
+	new_cid= "1461"
+	print("What is new employeeID?")
+	#new_eid= input()
+	new_eid= "11111"
+	print("What is their starting salary?")
+	#new_sal= input()
+	new_sal= "500000"
+	Query ="""INSERT INTO employee (eid, cid, name, email, salary, address) VALUES ('"""
+	Query_with_val = Query+new_eid+"', '"+new_cid+"', '"+new_name+"', '"+new_email+"','"+new_sal+"', '"+new_add
+	Query_end="');"
+	Query_fin = Query_with_val+Query_end
+	#dat1 = pd.read_sql_query(Query_fin, connection)
+	c = connection.cursor()
+	c.execute(Query_fin)
+	print(Query_fin)
+
+def processTwo(): #Is there a creening on this date?
 	print("placeholder2")
 
-def processThree():
+def processThree(): #How many times has this item sold
 	print("placeholder3")
 
-
-def processFour():
+def processFour(): # How many Items has a customer purchased
 	print("placeholder4")
 
-def processFive():
+def processFive(): # 
 	print("placeholder5")
 
 
 
 
-def exit_prog():
+def exit_prog(connection):
 	#close connection to database
-	conn = None
+	connection = None
 	print("Exiting Program")
 	sys.exit()
 
@@ -78,7 +104,7 @@ def display_menu():
 	print("-----------------Program Menu-----------------")
 	print("Enter the associted number to begin a process:")	
 	print("0: Redisplay Menu")
-	print("1: Query 1")
+	print("1: Create a new Employee")
 	print("2: Query 2")
 	print("3: Query 3")
 	print("4: Query 4")
