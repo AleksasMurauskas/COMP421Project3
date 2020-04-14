@@ -31,16 +31,51 @@ def main():
 			display_menu()
 		elif(int(use_in)==10): # prompted exit 
 			exit_prog(connection)
+
 		elif(int(use_in)==1):
 			processOne(connection)
+			print('Do you wish to continue? (Y/N)')
+			exitq=input()
+			if exitq=='N':
+				exit_prog(connection)
+			else:
+				display_menu()
+
 		elif(int(use_in)==2):
-			processTwo()
+			processTwo(connection)
+			print('Do you wish to continue? (Y/N)')
+			exitq=input()
+			if exitq=='N':
+				exit_prog(connection)
+			else:
+				display_menu()
+
 		elif(int(use_in)==3):
-			processThree()
+			processThree(connection)
+			print('Do you wish to continue? (Y/N)')
+			exitq=input()
+			if exitq=='N':
+				exit_prog(connection)
+			else:
+				display_menu()
+
 		elif(int(use_in)==4):
-			processFour()
+			processFour(connection)
+			print('Do you wish to continue? (Y/N)')
+			exitq=input()
+			if exitq=='N':
+				exit_prog(connection)
+			else:
+				display_menu()
+
 		elif(int(use_in)==5):
-			processFive()
+			processFive(connection)
+			print('Do you wish to continue? (Y/N)')
+			exitq=input()
+			if exitq=='N':
+				exit_prog(connection)
+			else:
+				display_menu()
 		else:
 			print("Invalid Input, please try again")
 
@@ -65,51 +100,64 @@ def processOne(connection): #Make a New Employee
 	print("What is their starting salary?")
 	#new_sal= input()
 	new_sal= "500000"
-	Query ="""INSERT INTO employee (eid, cid, name, email, salary, address) VALUES ('"""
-	Query_with_val = Query+new_eid+"', '"+new_cid+"', '"+new_name+"', '"+new_email+"','"+new_sal+"', '"+new_add
-	Query_end="');"
-	Query_fin = Query_with_val+Query_end
+	Query ="INSERT INTO employee(eid, cid, name, email, salary, address) VALUES('"
+	Query_with_val = Query+new_eid+"', '"+new_cid+"', '"+new_name+"', '"+new_email+"','"+new_sal+"', '"+new_add+"') RETURNING eid;"
 	#dat1 = pd.read_sql_query(Query_fin, connection)
-	c = connection.cursor()
-	c.execute(Query_fin)
-	print(Query_fin)
+	dat1 = pd.read_sql_query(Query_with_val, connection)
+	dat1.set_index(['eid'])
+	print(dat1)
+	print(Query_with_val)
 
-def processTwo(): #What movie titles are screening on this date
+
+#confirmed works
+def processTwo(connection): #What movie titles are screening on this date
 	print("What is the date you would like to select")
 	#in_date =input()
 	in_date ="1919-06-26"
-	query = """select name from screening s, movie m where s.movieid = m.movieid and date ='1919-06-26'"""
-	q_input = """select name from screening s, movie m where s.movieid = m.movieid and date ="""
+	query = "SELECT name, date from screening s, movie m where s.movieid = m.movieid and date ='2121-02-01'"
+	q_input = "SELECT name from screening s, movie m where s.movieid = m.movieid and date ="
 	q_fin = q_input+"'"+in_date+"';"
 
 	dat1 = pd.read_sql_query(query, connection)
-	dat1.set_index(['Movie Titles'])
+	dat1.set_index(['name'])
 	print("Movie Titles:\n")
-	print(dat1.head())
+	print(dat1)
+
+#confirmed works
+def processThree(connection): #How many cinemas are have screened a movie
+	print("What movie are you looking for?")
+	#in_date =input()
+	movie ="quis urna. Nunc quis arcu"
+	query = "SELECT count(cid) from screening s, movie m  where m.name like '%"+movie+"%' and m.movieid=s.movieid"
+
+	dat1 = pd.read_sql_query(query, connection)
+	print(dat1)
+	print("Number of cinemas that screened the movie:\n")
+	print(dat1['count'][0])
 
 
-def processThree(): #How many cinemas are have a certain movie in their catalog
-	print("placeholder3")
-	cinema=cinema
-
-
-def processFour(): # How many Items has a customer purchases the 
-	print("placeholder4")
+def processFour(connection): # How many Items has a customer purchased the
+	print("Email of the customer?")
+	#email =input()
+	email='Quisque@sodales.co.uk'
+	query="SELECT SUM(quantity) from orders o, customer c where o.custid=c.custid and c.custemail='"+email+"'"
+	dat1 = pd.read_sql_query(query, connection)
+	print('Total items bought')
+	print(dat1['sum'][0])
 
 def processFive(connection): #Show which cinemas have a room larger than 260 seats
-	print("placeholder5")
 
-	query= """select address, nbr, capacity from cinema c, room r
+	print("What size of room are you looking for?")
+	cap=input()
+	query= """select address, nbr as room_nb, capacity from cinema c, room r
 			where c.cid=r.cid 
-			and capacity >260 """
-	print("What is the id of the ")
+			and r.capacity > """+str(cap)
 
-
-	
 	dat1 = pd.read_sql_query(query, connection)
-	dat1.set_index(['Cinema address, Room Number, Room Capacity'])
+	print(dat1.keys())
+	dat1.set_index(['address', 'room_nb', 'capacity'])
 	print("Cinemas:\n")
-	print(dat1.head())
+	print(dat1)
 
 
 
@@ -126,9 +174,9 @@ def display_menu():
 	print("0: Redisplay Menu")
 	print("1: Create a new Employee")
 	print("2: What movie screenings are on this date")
-	print("3: How many cinemas are have a certain movie in their catalog")
-	print("4: Query 4")
-	print("5: ") 
+	print("3: How many cinemas are have screened a certain movie")
+	print("4: How many Items has a customer purchased ")
+	print("5: Show which cinemas have a room larger than x seats")
 	print("10: Exit Program")
 
 main()
