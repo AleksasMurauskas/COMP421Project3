@@ -112,21 +112,23 @@ def processOne(connection): #Make a New Employee
 #confirmed works
 def processTwo(connection): #What movie titles are screening on this date
 	print("What is the date you would like to select")
-	#in_date =input()
-	in_date ="1919-06-26"
+	#in_date =str(input())
+	in_date ="2121-02-01"
 	query = "SELECT name, date from screening s, movie m where s.movieid = m.movieid and date ='2121-02-01'"
 	q_input = "SELECT name from screening s, movie m where s.movieid = m.movieid and date ="
 	q_fin = q_input+"'"+in_date+"';"
 
-	dat1 = pd.read_sql_query(query, connection)
+	dat1 = pd.read_sql_query(q_fin, connection)
 	dat1.set_index(['name'])
 	print("Movie Titles:\n")
 	print(dat1)
+	print(q_fin)
+
 
 #confirmed works
 def processThree(connection): #How many cinemas are have screened a movie
 	print("What movie are you looking for?")
-	#in_date =input()
+	#in_date =str(input())
 	movie ="quis urna. Nunc quis arcu"
 	query = "SELECT count(cid) from screening s, movie m  where m.name like '%"+movie+"%' and m.movieid=s.movieid"
 
@@ -134,21 +136,24 @@ def processThree(connection): #How many cinemas are have screened a movie
 	print(dat1)
 	print("Number of cinemas that screened the movie:\n")
 	print(dat1['count'][0])
+	print(query)
 
 
 def processFour(connection): # How many Items has a customer purchased the
 	print("Email of the customer?")
-	#email =input()
+	#email =str(input())
 	email='Quisque@sodales.co.uk'
 	query="SELECT SUM(quantity) from orders o, customer c where o.custid=c.custid and c.custemail='"+email+"'"
 	dat1 = pd.read_sql_query(query, connection)
 	print('Total items bought')
 	print(dat1['sum'][0])
+	print(query)
 
 def processFive(connection): #Show which cinemas have a room larger than 260 seats
 
 	print("What size of room are you looking for?")
 	cap=input()
+	#cap=280
 	query= """select address, nbr as room_nb, capacity from cinema c, room r
 			where c.cid=r.cid 
 			and r.capacity > """+str(cap)
@@ -158,6 +163,7 @@ def processFive(connection): #Show which cinemas have a room larger than 260 sea
 	dat1.set_index(['address', 'room_nb', 'capacity'])
 	print("Cinemas:\n")
 	print(dat1)
+	print(query)
 
 
 
