@@ -82,24 +82,23 @@ def main():
 
 def processOne(connection): #Make a New Employee
 	print("What is their name?")
-	#new_name= input()
-	new_name= "Aleks"
+	new_name= str(input())
+	#new_name= "Aleks"
 	print("What is their address?")
-	#new_add= input()
-	new_add= "3434 St. Famille" 
+	new_add= str(input())
+	#new_add= "3434 St. Famille" 
 	print("What is their new email?")
-	#new_email= input()
-	new_email= "avm@avm.ca"
-	new_add= "3434 St. Famille" 
+	new_email= str(input())
+	#new_email= "avm@avm.ca"
 	print("Where do they work? please enter a cid")
-	#new_cid= input()
-	new_cid= "1461"
+	new_cid= str(input())
+	#new_cid= "1461"
 	print("What is new employeeID?")
-	#new_eid= input()
-	new_eid= "11111"
+	new_eid= str(input())
+	#new_eid= "11111"
 	print("What is their starting salary?")
-	#new_sal= input()
-	new_sal= "500000"
+	new_sal= str(input())
+	#new_sal= "500000"
 	Query ="INSERT INTO employee(eid, cid, name, email, salary, address) VALUES('"
 	Query_with_val = Query+new_eid+"', '"+new_cid+"', '"+new_name+"', '"+new_email+"','"+new_sal+"', '"+new_add+"') RETURNING eid;"
 	#dat1 = pd.read_sql_query(Query_fin, connection)
@@ -112,8 +111,8 @@ def processOne(connection): #Make a New Employee
 #confirmed works
 def processTwo(connection): #What movie titles are screening on this date
 	print("What is the date you would like to select")
-	#in_date =str(input())
-	in_date ="2121-02-01"
+	in_date =str(input())
+	#in_date ="2121-02-01"
 	query = "SELECT name, date from screening s, movie m where s.movieid = m.movieid and date ='2121-02-01'"
 	q_input = "SELECT name from screening s, movie m where s.movieid = m.movieid and date ="
 	q_fin = q_input+"'"+in_date+"';"
@@ -128,8 +127,8 @@ def processTwo(connection): #What movie titles are screening on this date
 #confirmed works
 def processThree(connection): #How many cinemas are have screened a movie
 	print("What movie are you looking for?")
-	#in_date =str(input())
-	movie ="quis urna. Nunc quis arcu"
+	movie =str(input())
+	#movie ="quis urna. Nunc quis arcu"
 	query = "SELECT count(cid) from screening s, movie m  where m.name like '%"+movie+"%' and m.movieid=s.movieid"
 
 	dat1 = pd.read_sql_query(query, connection)
@@ -141,8 +140,8 @@ def processThree(connection): #How many cinemas are have screened a movie
 
 def processFour(connection): # How many Items has a customer purchased the
 	print("Email of the customer?")
-	#email =str(input())
-	email='Quisque@sodales.co.uk'
+	email =str(input())
+	#email='Quisque@sodales.co.uk'
 	query="SELECT SUM(quantity) from orders o, customer c where o.custid=c.custid and c.custemail='"+email+"'"
 	dat1 = pd.read_sql_query(query, connection)
 	print('Total items bought')
